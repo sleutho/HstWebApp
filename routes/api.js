@@ -1,8 +1,23 @@
 var express = require('express');
+var studylist = require('../studies/studylist')
 var router = express.Router();
 
 router.get('/studies', function(req, res, next) {
-  res.send('List studies');
+  studylist.getStudyList(function(list) {
+      res.send(list);
+  });
+});
+
+router.post('/studies', function(req, res, next) {
+    studylist.createStudy(function(newStudyId) {
+        res.send(newStudyId); 
+    });
+});
+
+router.delete('/studies/:study', function(req, res, next) {
+    studylist.deleteStudy(req.params.study, function(msg) {
+        res.send(msg); 
+    });
 });
 
 router.get('/studies/:study', function(req, res, next) {
@@ -17,10 +32,6 @@ router.get('/studies/:id/variabes/:id', function(req, res, next) {
   res.send('List study variable details');
 });
 
-router.post('/studies', function(req, res, next) {
-  res.send(new Object("New study created"));
-});
-
 router.post('/studies/:study/variables', function(req, res, next) {
   res.send(new Object("New variable created in study ( " + req.params.study + " )"));
 });
@@ -31,10 +42,6 @@ router.put('/studies/:study', function(req, res, next) {
 
 router.put('/studies/:study/variables/:variable', function(req, res, next) {
   res.send(new Object("In study ( " + req.params.study + " ) update variable ( " + req.params.variable + " )"));
-});
-
-router.delete('/studies/:study', function(req, res, next) {
-  res.send(new Object("Delete study ( " + req.params.study + " )"));
 });
 
 router.delete('/studies/:study/variables/:variable', function(req, res, next) {
