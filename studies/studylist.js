@@ -2,9 +2,23 @@
 // Persistent datastore with automatic loading
 var Datastore = require('nedb');
 var uuid = require('uuid');
+var fs = require('fs');
+
+function getUserHome() {
+    return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
+function getDataHome() {
+    var dataHome = getUserHome() + '/HstWebApp';
+    try {
+        fs.mkdirSync(dataHome);
+    } finally {
+        return dataHome;
+    }
+}
 
 var db = new Datastore({
-        filename: 'path/to/datafile',
+        filename: getDataHome() + '/data.db',
         autoload: true,
         timestampData: true});
 
@@ -25,14 +39,17 @@ exports.getStudyList = function (onList) {
 };
 
 exports.createStudy = function (onCreate) {
+    var id = uuid.v4();
+    var studyDir = getDataHome() + '/' + id;
+    fs.mkdirSync(studyDir)
+    
     var doc = {
-        study: uuid.v4(),
+        study: id,
         today: new Date(),
-        directory: 'dir'};
+        directory: studyDir};
 
     db.insert(doc, function (err, newDoc) {
         
-        //create studydir
         //init studydir
         
         var newStudy = {};
@@ -43,10 +60,17 @@ exports.createStudy = function (onCreate) {
 
 exports.deleteStudy = function (id, onDelete) {
     
-    db.remove({ study: id }, {}, function (err, numRemoved) {
-        if (numRemoved == 1)
-            onDelete("Delete study ( " + id + " )")
-        else
-            onDelete(err)
+    db.find({ study: id }, function (err, docs) {
+        var studyData = docs[0]; 
+        var studyDir = studyData.directory;
+        
+        db.remove({ study: id }, {}, function (err, numRemoved) {
+            
+            fs.rmdirSync(studyDir);
+            if (numRemoved == 1)
+                onDelete("Delete study ( " + id + " )")
+            else
+                onDelete(err)
+        });
     });
 };
