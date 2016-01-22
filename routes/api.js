@@ -1,22 +1,22 @@
 var express = require('express');
-var studylist = require('../studies/studylist')
+var studylist = require('../study/studylist')
 var router = express.Router();
 
 router.get('/studies', function(req, res, next) {
-  studylist.getStudyList(function(list) {
-      res.send(list);
+  studylist.getStudyList(function(err, data) {
+      res.status(err ? 400 : 200).json(err ? err : data);
   });
 });
 
 router.post('/studies', function(req, res, next) {
-    studylist.createStudy(function(newStudyId) {
-        res.send(newStudyId); 
+    studylist.createStudy(function(err, data) {
+      res.status(err ? 400 : 200).json(err ? err : data);
     });
 });
 
 router.delete('/studies/:study', function(req, res, next) {
-    studylist.deleteStudy(req.params.study, function(msg) {
-        res.send(msg); 
+    studylist.deleteStudy(req.params.study, function(err, data) {
+      res.status(err ? 400 : 200).json(err ? err : data);
     });
 });
 
