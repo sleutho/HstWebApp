@@ -41,7 +41,7 @@ exports.createStudy = function (onCreate) {
     db.insert(doc, function (err, newDoc) {
         if (err)
             return onCreate(err, newDoc); 
-        cmd.init(studyDir, function (initErr) {
+        cmd.init(studyDir, function (initErr, data) {
             onCreate(initErr, newDoc);
         });
     });
@@ -59,5 +59,17 @@ exports.deleteStudy = function (id, onDelete) {
             fs.rmdirSync(studyDir);
             onDelete(err, null);
         });
+    });
+};
+
+exports.getStudyDir = function (id, callback) {
+    db.find({ study: id }, function (err, docs) {
+        if (err)
+            return callback(err, null);
+        
+        var studyData = docs[0]; 
+        var studyDir = studyData.directory;
+        
+        callback(null, studyDir);
     });
 };
