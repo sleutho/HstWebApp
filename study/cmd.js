@@ -10,7 +10,7 @@ function getStudyDir(study, callback) {
     studylist.getStudyDir(study, callback);
 }
 
-function execHelperDir(studyDir, args, callback) {
+exports.execHelperDir = function (studyDir, args, callback) {
     execFile(getHstPath(), args, (error, stdout, stderr) => {
         if (error) {
             return callback(error, null);
@@ -21,43 +21,11 @@ function execHelperDir(studyDir, args, callback) {
     });
 }
 
-function execHelperStudy(study, args, callback) {
+exports.execHelperStudy = function (study, args, callback) {
     getStudyDir(study, function (err, studyDir) {
         if (err) {
             return callback(err, null);
         }
-        execHelperDir(studyDir, args, callback);
+        exports.execHelperDir(studyDir, args, callback);
     });
 }
-
-exports.init = function (dir, callback) {
-    execHelperDir(dir, ['init'], callback);
-};
-
-exports.getStudy = function (study, callback) {
-    execHelperStudy(study, ['get', 'study'], callback);
-};
-
-exports.setStudy = function (study, attr, value, callback) {
-    execHelperStudy(study, ['change', 'study', attr, value], callback);
-};
-
-exports.getVariables = function (study, callback) {
-    execHelperStudy(study, ['get', 'variable'], callback);
-};
-
-exports.getVariable = function (study, variable, callback) {
-    execHelperStudy(study, ['get', 'variable', variable], callback);
-};
-
-exports.addVariable = function (study, callback) {
-    execHelperStudy(study, ['add', 'variable'], callback);
-};
-
-exports.setVariable = function (study, variable, attr, value, callback) {
-    execHelperStudy(study, ['change', variable, attr, value], callback);
-};
-
-exports.removeVariable = function (study, variable, callback) {
-    execHelperStudy(study, ['remove', 'variable', variable], callback);
-};
