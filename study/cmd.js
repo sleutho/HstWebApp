@@ -7,7 +7,7 @@ exports.getHstPath = function () {
 }
 
 exports.execHelperDir = function (studyDir, args, callback) {
-    execFile(exports.getHstPath(), args, (error, stdout, stderr) => {
+    execFile(exports.getHstPath(), args, {cwd:studyDir}, (error, stdout, stderr) => {
         if (error) {
             return callback(error, null);
         }
