@@ -41,7 +41,7 @@ exports.createStudy = function (onCreate) {
     db.insert(doc, function (err, newDoc) {
         if (err)
             return onCreate(err, newDoc); 
-        cmd.execHelperDir(studyDir, ['init'], 
+        cmd.execHelperDir(studyDir, ['--init'], 
         function (initErr, data) {
             onCreate(initErr, newDoc);
         });

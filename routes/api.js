@@ -12,7 +12,7 @@ router.get('/studies', function (req, res, next) {
 
 router.get('/studies/:study', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['get', 'study']);
+    cmd.eval(req.params.study, ['--get', 'study']);
 });
 
 router.post('/studies', function (req, res, next) {
@@ -23,7 +23,7 @@ router.post('/studies', function (req, res, next) {
 
 router.put('/studies/:study', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['change', 'study', req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', 'study', req.query.attr, req.query.value]);
 });
 
 router.delete('/studies/:study', function (req, res, next) {
@@ -34,27 +34,27 @@ router.delete('/studies/:study', function (req, res, next) {
 
 router.get('/studies/:study/variables', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['get', 'variable']);
+    cmd.eval(req.params.study, ['--get', 'variable']);
 });
 
 router.get('/studies/:study/variables/:variable', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['get', 'variable', req.params.variable]);
+    cmd.eval(req.params.study, ['--get', 'variable', req.params.variable]);
 });
 
 router.post('/studies/:study/variables', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['add', 'variable']);
+    cmd.eval(req.params.study, ['--add', 'variable']);
 });
 
 router.put('/studies/:study/variables/:variable', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['change', req.params.variable, req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', req.params.variable, req.query.attr, req.query.value]);
 });
 
 router.delete('/studies/:study/variables/:variable', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['remove', 'variable', req.params.variable]);
+    cmd.eval(req.params.study, ['--remove', 'variable', req.params.variable]);
 });
 
 module.exports = router;
