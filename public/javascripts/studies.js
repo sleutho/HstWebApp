@@ -1,36 +1,30 @@
 
 function loadTable() {
-    var table = $("#list").find('tbody');
-
     $('#list tbody > tr').remove();
 
     $.ajax({
         type: "GET",
         dataType: "json",
+        processData: false,
         url: "/hyperstudy/api/studies",
         cache: false,
         success: function (data) {
-            
-            //console.log(Object.prototype.toString.call(data));
-
+            var table = $("#list").find('tbody');
             data.forEach(function (element) {
-
-                table.append($('<tr>')
+                table.append($('<tr>').attr('data-id', element.study)
                     .append($('<td>').text(element.study))
                     .append($('<td>').text(element.directory))
-                    .append($('<input id="remove" type="button" size="30" value="Remove">').click(function () {
+                    .append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
                         removeStudy(element.study, function () {
-                            $(this).closest('tr').remove();
+                            $('*[data-id="' + element.study + '"]').remove();
                         });
-                    }))
-                    );
+                    })));
             });
         }
     });
 }
 
 function newStudy() {
-
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -43,9 +37,8 @@ function newStudy() {
 }
 
 function removeStudy(id, callback) {
-
     $.ajax({
-        type: "Delete",
+        type: "DELETE",
         dataType: "json",
         url: "/hyperstudy/api/studies/" + id,
         cache: false,
@@ -56,12 +49,10 @@ function removeStudy(id, callback) {
 }
 
 $(document).ready(function () {
-
     $(document).ready(function () {
         $('#new').bind('click', function () {
             newStudy();
         });
     });
-
     loadTable();
 });
