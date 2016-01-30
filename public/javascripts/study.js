@@ -6,29 +6,21 @@ function loadTable() {
         type: "GET",
         dataType: "json",
         processData: false,
-        url: "/hyperstudy/api/studies",
+        url: "/hyperstudy/api/studies/" + study,
         cache: false,
         success: function (data) {
             var table = $("#list").find('tbody');
             data.forEach(function (element) {
                 table.append($('<tr>').attr('data-id', element.study)
-                    .append($('<td>').append($('<a>',{
-    text: element.study,
-    title: 'Open Study',
-    href: "/studies/" + element.study
-    })))
+                    .append($('<td>').text(element.study))
                     .append($('<td>').text(element.directory))
-                    .append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
-                        removeStudy(element.study, function () {
-                            $('*[data-id="' + element.study + '"]').remove();
-                        });
-                    })));
+                    );
             });
         }
     });
 }
 
-function newStudy() {
+/*function newStudy() {
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -51,12 +43,8 @@ function removeStudy(id, callback) {
         }
     });
 }
+*/
 
 $(document).ready(function () {
-    $(document).ready(function () {
-        $('#new').bind('click', function () {
-            newStudy();
-        });
-    });
     loadTable();
 });

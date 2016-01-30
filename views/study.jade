@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script.
+      var study = !{JSON.stringify(study)};
+    script(src="https://code.jquery.com/jquery-1.12.0.js")
+    script(src="/javascripts/study.js")
+  body
+    p
+      a(href="/studies") Back to Studies
+    h1 #{title}
+    table#list
+      tbody
