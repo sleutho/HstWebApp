@@ -52,14 +52,16 @@ exports.deleteStudy = function (id, onDelete) {
     db.find({ study: id }, function (err, docs) {
         if (err)
             return onDelete(err, null);
-        
-        var studyData = docs[0]; 
-        var studyDir = studyData.directory;
-        
-        db.remove({ study: id }, {}, function (err, numRemoved) {
-            fs.rmdirSync(studyDir);
-            onDelete(err, null);
-        });
+
+        if (docs.length == 1) {
+            var studyData = docs[0];
+            var studyDir = studyData.directory;
+
+            db.remove({ study: id }, {}, function (err, numRemoved) {
+                fs.rmdirSync(studyDir);
+                onDelete(err, null);
+            });
+        }
     });
 };
 
