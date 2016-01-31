@@ -21,7 +21,8 @@ module.exports = function (res) {
                     if (stderr.length) {
                         return res.status(400).json(stderr.toString());
                     }
-                    res.status(200).json(stdout.length ? stdout.toString() : null);
+                    console.log("EXEC " + stdout.length ? stdout.toString() : null);
+                    res.status(stdout.length ? 200 : 204).send(stdout.length ? stdout.toString() : null);
                 });
             });
         }
