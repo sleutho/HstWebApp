@@ -1,0 +1,14 @@
+extends layout
+
+append head
+  script.
+    var study = !{JSON.stringify(study)};
+  script(src="/javascripts/variables.js")
+
+append content
+  p
+    a(href="/studies/" + study) Back to Study
+  table#list
+    tbody
+  p
+    a(href="/studies/" + study + "/responses") Next to Responses
