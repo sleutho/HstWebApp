@@ -9,23 +9,24 @@ function loadTable() {
         url: "/hyperstudy/api/studies",
         cache: false,
         success: function (data) {
-            var table = $("#list").find('tbody');
             data.forEach(function (element) {
-                table.append($('<tr>').attr('data-id', element.study)
-                    .append($('<td>').append($('<a>',{
-    text: element.study,
-    title: 'Open Study',
-    href: "/studies/" + element.study
-    })))
-                    .append($('<td>').text(element.directory))
-                    .append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
-                        removeStudy(element.study, function () {
-                            $('*[data-id="' + element.study + '"]').remove();
-                        });
-                    })));
+                addRow(element);
             });
         }
     });
+}
+
+function addRow(obj) {
+    var table = $("#list").find('tbody');
+    var tr = $('<tr>').attr('data-id', obj.study);
+    tr.append($('<td>').append($('<a>', { text: obj.study, title: 'Open Study', href: "/studies/" + obj.study })));
+    tr.append($('<td>').text(obj.directory));
+    tr.append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
+        removeStudy(obj.study, function () {
+            $('*[data-id="' + obj.study + '"]').remove();
+        });
+    }))
+    table.append(tr);
 }
 
 function newStudy() {
@@ -35,7 +36,7 @@ function newStudy() {
         url: "/hyperstudy/api/studies",
         cache: false,
         success: function (data) {
-            loadTable();
+            addRow(data);
         }
     });
 }

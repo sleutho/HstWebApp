@@ -5,17 +5,13 @@ function loadTable() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        processData: false,
         url: "/hyperstudy/api/studies/" + study,
         cache: false,
         success: function (data) {
-            /*var table = $("#list").find('tbody');
-            data.forEach(function (element) {
-                table.append($('<tr>').attr('data-id', element.study)
-                    .append($('<td>').text(element.study))
-                    .append($('<td>').text(element.directory))
-                    );
-            });*/
+            var table = $("#list").find('tbody');
+            table.append($('<tr>')
+                .append($('<td>').text(data.Label))
+                .append($('<td>').text(data.Comment)));
         }
     });
 }
