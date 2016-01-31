@@ -5,10 +5,18 @@ append head
     var study = !{JSON.stringify(study)};
   script(src="/javascripts/study.js")
 
-append content
+append backward
   p
     a(href="/studies") Back to Studies
+
+append content
   table#list
+    thead
+      tr
+        td Label
+        td Comment
     tbody
+
+append forward
   p
     a(href="/studies/" + study + "/variables") Next to Variables
