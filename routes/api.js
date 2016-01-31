@@ -32,14 +32,15 @@ router.delete('/studies/:study', function (req, res, next) {
     });
 });
 
+
 router.get('/studies/:study/variables', function (req, res, next) {
     var cmd = exec(res);
     cmd.eval(req.params.study, ['--get', 'variable']);
 });
 
-router.get('/studies/:study/variables/:variable', function (req, res, next) {
+router.get('/studies/:study/variables/:item', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--get', 'variable', req.params.variable]);
+    cmd.eval(req.params.study, ['--get', 'variable', req.params.item]);
 });
 
 router.post('/studies/:study/variables', function (req, res, next) {
@@ -47,14 +48,40 @@ router.post('/studies/:study/variables', function (req, res, next) {
     cmd.eval(req.params.study, ['--add', 'variable']);
 });
 
-router.put('/studies/:study/variables/:variable', function (req, res, next) {
+router.put('/studies/:study/variables/:item', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--change', req.params.variable, req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', req.params.item, req.query.attr, req.query.value]);
 });
 
-router.delete('/studies/:study/variables/:variable', function (req, res, next) {
+router.delete('/studies/:study/variables/:item', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--remove', 'variable', req.params.variable]);
+    cmd.eval(req.params.study, ['--remove', 'variable', req.params.item]);
+});
+
+
+router.get('/studies/:study/responses', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--get', 'response']);
+});
+
+router.get('/studies/:study/responses/:item', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--get', 'response', req.params.item]);
+});
+
+router.post('/studies/:study/responses', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--add', 'response']);
+});
+
+router.put('/studies/:study/responses/:item', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--change', req.params.item, req.query.attr, req.query.value]);
+});
+
+router.delete('/studies/:study/responses/:item', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--remove', 'response', req.params.item]);
 });
 
 module.exports = router;

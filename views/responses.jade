@@ -1,0 +1,32 @@
+extends layout
+
+append head
+  script.
+    var study = !{JSON.stringify(study)};
+  script(src="/javascripts/responses.js")
+ 
+append backward
+  p
+    a(href="/studies/" + study + "/variables") Back to Variables
+
+append content
+  input(id="new" type="button", size="30", value="New Response")
+  table#list
+    thead
+      tr
+        td State
+        td Label
+        td Varname
+        td Equation
+        td ModelParameter
+        td MinValueAttr
+        td InitialValue
+        td MaxValueAttr
+        td MasterEvaluator
+        td Comment
+    tbody
+
+append forward
+  p
+    a(href="/studies/" + study + "/evaluate") Next to Evaluate
+

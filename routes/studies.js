@@ -21,4 +21,11 @@ router.get('/:study/variables', function (req, res, next) {
     });
 });
 
+router.get('/:study/responses', function (req, res, next) {
+    res.render('responses', {
+        title: 'Responses of Study ( ' + req.params.study + ' )',
+        study: req.params.study
+    });
+});
+
 module.exports = router;
