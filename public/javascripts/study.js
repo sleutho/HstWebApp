@@ -10,7 +10,7 @@ function loadTable() {
         success: function (data) {
             var table = $("#list").find('tbody');
             table.append($('<tr>')
-                .append($('<td>').text(data.Label))
+                .append($('<td>').text(data.Label).dblclick(editCell))
                 .append($('<td>').text(data.Comment)));
         }
     });
@@ -19,3 +19,24 @@ function loadTable() {
 $(document).ready(function () {
     loadTable();
 });
+
+function editCell() {
+    var OriginalContent = $(this).text();
+
+    $(this).addClass("cellEditing");
+    $(this).html('<input type="text" value="' + OriginalContent + '" />');
+    $(this).children().first().focus();
+
+    $(this).children().first().keypress(function (e) {
+        if (e.which == 13) {
+            var newContent = $(this).val();
+            $(this).parent().text(newContent);
+            $(this).parent().removeClass("cellEditing");
+        }
+    });
+
+    $(this).children().first().blur(function () {
+        $(this).parent().text(OriginalContent);
+        $(this).parent().removeClass("cellEditing");
+    });
+}
