@@ -1,12 +1,14 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="https://code.jquery.com/jquery-1.12.0.js")
-    script(src="/javascripts/studies.js")
-  body
-    h1 #{title}
-    input(id="new" type="button", size="30", value="New Study")
-    table#list
-      tbody
+extends layout
+
+append head
+  script(src="/javascripts/studies.js")
+
+append content
+  input(id="new" type="button", size="30", value="New Study")
+  table#list
+    thead
+      tr
+        td Id
+        td Server Directory
+        td
+    tbody

@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/:study', function (req, res, next) {
     res.render('study', {
-        title: 'Study',
+        title: 'Study ( ' + req.params.study + ' )',
         study: req.params.study
     });
 });
