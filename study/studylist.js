@@ -48,6 +48,20 @@ exports.createStudy = function (onCreate) {
     });
 };
 
+function rmDir(dirPath) {
+    try { var files = fs.readdirSync(dirPath); }
+    catch (e) { return; }
+    if (files.length > 0)
+        for (var i = 0; i < files.length; i++) {
+            var filePath = dirPath + '/' + files[i];
+            if (fs.statSync(filePath).isFile())
+                fs.unlinkSync(filePath);
+            else
+                rmDir(filePath);
+        }
+    fs.rmdirSync(dirPath);
+};
+
 exports.deleteStudy = function (id, onDelete) {
     db.find({ study: id }, function (err, docs) {
         if (err)
@@ -58,7 +72,8 @@ exports.deleteStudy = function (id, onDelete) {
             var studyDir = studyData.directory;
 
             db.remove({ study: id }, {}, function (err, numRemoved) {
-                fs.rmdirSync(studyDir);
+                //fs.rmdirSync(studyDir);
+                rmDir(studyDir);
                 onDelete(err, null);
             });
         }
