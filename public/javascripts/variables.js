@@ -19,14 +19,14 @@ function loadTable() {
 function addRow(obj) {
     var table = $("#list").find('tbody');
     var tr = $('<tr>').attr('data-id', obj.Varname);
-    tr.append($('<td>').text(obj.State));
-    tr.append($('<td>').text(obj.Label));
-    tr.append($('<td>').text(obj.Varname));
-    tr.append($('<td>').text(obj.Equation));
-    tr.append($('<td>').text(obj.ParamRefAttr));
-    tr.append($('<td>').text(obj.Category));
-    tr.append($('<td>').text(obj.Role));
-    tr.append($('<td>').text(obj.Comment));
+    tr.append($('<td>').attr('data-attr', 'State').dblclick(editCell).text(obj.State));
+    tr.append($('<td>').attr('data-attr', 'Label').dblclick(editCell).text(obj.Label));
+    tr.append($('<td>').attr('data-attr', 'Varname').dblclick(editCell).text(obj.Varname));
+    tr.append($('<td>').attr('data-attr', 'Equation').dblclick(editCell).text(obj.Equation));
+    tr.append($('<td>').attr('data-attr', 'ParamRefAttr').dblclick(editCell).text(obj.ParamRefAttr));
+    tr.append($('<td>').attr('data-attr', 'Category').dblclick(editCell).text(obj.Category));
+    tr.append($('<td>').attr('data-attr', 'Role').dblclick(editCell).text(obj.Role));
+    tr.append($('<td>').attr('data-attr', 'Comment').dblclick(editCell).text(obj.Comment));
     tr.append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
         removeVariable(obj.Varname, function () {
             $('*[data-id="' + obj.Varname + '"]').remove();
@@ -68,3 +68,42 @@ $(document).ready(function () {
     });
     loadTable();
 });
+
+function editCell() {
+    var OriginalContent = $(this).text();
+    var attr = $(this).attr('data-attr');
+
+    $(this).addClass("cellEditing");
+    $(this).html('<input type="text" value="' + OriginalContent + '" />');
+    $(this).children().first().focus();
+
+    $(this).children().first().keypress(function (e) {
+        if (e.which == 13) {
+            var newContent = $(this).val();
+            var parent = $(this).parent();
+            var varname = parent.parent().attr('data-id');
+
+            $.ajax({
+                type: "PUT",
+                url: "/hyperstudy/api/studies/" + study + '/variables/' + varname,
+                //data: 'attr=' + attr + '&value=' + newContent,
+                data: { attr: attr, value: newContent },
+                cache: false,
+                success: function (data) {
+                    parent.text(newContent);
+                    parent.removeClass("cellEditing");},
+                error: function (req, status, err) {
+                    console.log(status);
+                    console.log(err);
+                    parent.text(OriginalContent);
+                    parent.removeClass("cellEditing");}
+            });
+
+        }
+    });
+
+    $(this).children().first().blur(function () {
+        $(this).parent().text(OriginalContent);
+        $(this).parent().removeClass("cellEditing");
+    });
+}

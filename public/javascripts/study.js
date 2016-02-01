@@ -41,8 +41,12 @@ function editCell() {
                 cache: false,
                 success: function (data) {
                     parent.text(newContent);
-                    parent.removeClass("cellEditing");
-                }
+                    parent.removeClass("cellEditing");},
+                error: function (req, status, err) {
+                    console.log(status);
+                    console.log(err);
+                    parent.text(OriginalContent);
+                    parent.removeClass("cellEditing");}
             });
 
         }
