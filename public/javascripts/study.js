@@ -10,8 +10,8 @@ function loadTable() {
         success: function (data) {
             var table = $("#list").find('tbody');
             table.append($('<tr>')
-                .append($('<td>').text(data.Label).dblclick(editCell))
-                .append($('<td>').text(data.Comment)));
+                .append($('<td>').attr('data-attr', 'Label').text(data.Label).dblclick(editCell))
+                .append($('<td>').attr('data-attr', 'Comment').text(data.Comment).dblclick(editCell)));
         }
     });
 }
@@ -22,6 +22,7 @@ $(document).ready(function () {
 
 function editCell() {
     var OriginalContent = $(this).text();
+    var attr = $(this).attr('data-attr');
 
     $(this).addClass("cellEditing");
     $(this).html('<input type="text" value="' + OriginalContent + '" />');
@@ -30,8 +31,20 @@ function editCell() {
     $(this).children().first().keypress(function (e) {
         if (e.which == 13) {
             var newContent = $(this).val();
-            $(this).parent().text(newContent);
-            $(this).parent().removeClass("cellEditing");
+            var parent = $(this).parent();
+
+            $.ajax({
+                type: "PUT",
+                url: "/hyperstudy/api/studies/" + study,
+                //data: 'attr=' + attr + '&value=' + newContent,
+                data: { attr: attr, value: newContent },
+                cache: false,
+                success: function (data) {
+                    parent.text(newContent);
+                    parent.removeClass("cellEditing");
+                }
+            });
+
         }
     });
 

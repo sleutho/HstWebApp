@@ -23,7 +23,8 @@ router.post('/studies', function (req, res, next) {
 
 router.put('/studies/:study', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--change', 'study', req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', 'study', req.param('attr'), req.param('value')]);
+    //cmd.eval(req.params.study, ['--change', 'study', req.params.attr, req.params.value]);
 });
 
 router.delete('/studies/:study', function (req, res, next) {
@@ -50,7 +51,7 @@ router.post('/studies/:study/variables', function (req, res, next) {
 
 router.put('/studies/:study/variables/:item', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--change', req.params.item, req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', req.params.item, req.param('attr'), req.param('value')]);
 });
 
 router.delete('/studies/:study/variables/:item', function (req, res, next) {
@@ -76,7 +77,7 @@ router.post('/studies/:study/responses', function (req, res, next) {
 
 router.put('/studies/:study/responses/:item', function (req, res, next) {
     var cmd = exec(res);
-    cmd.eval(req.params.study, ['--change', req.params.item, req.query.attr, req.query.value]);
+    cmd.eval(req.params.study, ['--change', req.params.item, req.param('attr'), req.param('value')]);
 });
 
 router.delete('/studies/:study/responses/:item', function (req, res, next) {
