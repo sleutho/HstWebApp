@@ -35,4 +35,11 @@ router.get('/:study/evaluate', function (req, res, next) {
     });
 });
 
+router.get('/:study/summary', function (req, res, next) {
+    res.render('summary', {
+        title: 'Summary of Study ( ' + req.params.study + ' )',
+        study: req.params.study
+    });
+});
+
 module.exports = router;

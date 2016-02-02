@@ -45,6 +45,13 @@ router.get('/studies/:study/evaluate', function (req, res, next) {
 });
 
 
+
+router.get('/studies/:study/post', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--post']);
+});
+
+
 router.get('/studies/:study/variables', function (req, res, next) {
     var cmd = exec(res);
     cmd.eval(req.params.study, ['--get', 'variable']);
