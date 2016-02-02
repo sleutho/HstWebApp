@@ -26,6 +26,18 @@ function addRow(obj) {
     tr.append($('<td>').attr('data-attr', 'ParamRefAttr').dblclick(editCell).text(obj.ParamRefAttr));
     tr.append($('<td>').attr('data-attr', 'Category').dblclick(editCell).text(obj.Category));
     tr.append($('<td>').attr('data-attr', 'Role').dblclick(editCell).text(obj.Role));
+    tr.append($('<td>').attr('data-attr', 'Levels').dblclick(editCell).text(obj.Levels));
+    tr.append($('<td>').attr('data-attr', 'RoleDesc').dblclick(editCell).text(obj.RoleDesc));
+    tr.append($('<td>').attr('data-attr', 'DataType').dblclick(editCell).text(obj.DataType));
+    tr.append($('<td>').attr('data-attr', 'MinValueAttr').dblclick(editCell).text(obj.MinValueAttr));
+    tr.append($('<td>').attr('data-attr', 'InitialValue').dblclick(editCell).text(obj.InitialValue));
+    tr.append($('<td>').attr('data-attr', 'MaxValueAttr').dblclick(editCell).text(obj.MaxValueAttr));
+    tr.append($('<td>').attr('data-attr', 'DataMode').dblclick(editCell).text(obj.DataMode));
+    tr.append($('<td>').attr('data-attr', 'Levels').dblclick(editCell).text(obj.Levels));
+    tr.append($('<td>').attr('data-attr', 'Distribution').dblclick(editCell).text(obj.Distribution));
+    tr.append($('<td>').attr('data-attr', 'Alpha').dblclick(editCell).text(obj.Alpha));
+    tr.append($('<td>').attr('data-attr', 'Beta').dblclick(editCell).text(obj.Beta));
+    tr.append($('<td>').attr('data-attr', 'DataMode').dblclick(editCell).text(obj.Gamma));
     tr.append($('<td>').attr('data-attr', 'Comment').dblclick(editCell).text(obj.Comment));
     tr.append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
         removeVariable(obj.Varname, function () {
