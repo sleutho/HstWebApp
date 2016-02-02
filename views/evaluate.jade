@@ -1,0 +1,19 @@
+extends layout
+
+append head
+  script.
+    var study = !{JSON.stringify(study)};
+  script(src="/javascripts/evaluate.js")
+ 
+append backward
+  p
+    a(href="/studies/" + study + "/responses") Back to Responses
+
+append content
+  input(id="work" type="button", size="30", value="Evaluate")
+  p#status
+
+append forward
+  p
+    a(href="/studies/" + study + "/summary") Next to Summary
+

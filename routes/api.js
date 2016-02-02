@@ -34,6 +34,17 @@ router.delete('/studies/:study', function (req, res, next) {
 });
 
 
+router.put('/studies/:study/evaluate', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--evaluate']);
+});
+
+router.get('/studies/:study/evaluate', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--evaluate', 'get']);
+});
+
+
 router.get('/studies/:study/variables', function (req, res, next) {
     var cmd = exec(res);
     cmd.eval(req.params.study, ['--get', 'variable']);

@@ -14,11 +14,13 @@ module.exports = function (res) {
                 if (err) {
                     return res.status(400).json(err);
                 }
-                execFile(cmd.getHstPath(), args, {cwd:studyDir},(error, stdout, stderr) => {
+                execFile(cmd.getHstPath(), args, {cwd:studyDir} ,(error, stdout, stderr) => {
                     if (error) {
+                        console.log("EXEC Err" + error);
                         return res.status(400).json(error);
                     }
                     if (stderr.length) {
+                        console.log("EXEC Err" + stderr.toString());
                         return res.status(400).json(stderr.toString());
                     }
                     console.log("EXEC " + stdout.length ? stdout.toString() : null);

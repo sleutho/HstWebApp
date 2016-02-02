@@ -28,4 +28,11 @@ router.get('/:study/responses', function (req, res, next) {
     });
 });
 
+router.get('/:study/evaluate', function (req, res, next) {
+    res.render('evaluate', {
+        title: 'Evaluate Study ( ' + req.params.study + ' )',
+        study: req.params.study
+    });
+});
+
 module.exports = router;
