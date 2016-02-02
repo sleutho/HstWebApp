@@ -1,25 +1,48 @@
 
 $(document).ready(function () {
-    var table = $("#list").find('tbody');
-    var tr = $('<tr>').attr('data-id', obj.study);
-    tr.append($('<td>').append($('<a>', { text: obj.study, title: 'Open Study', href: "/studies/" + obj.study })));
-    tr.append($('<td>').text(obj.directory));
-    tr.append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
-        removeStudy(obj.study, function () {
-            $('*[data-id="' + obj.study + '"]').remove();
-        });
-    }))
-    table.append(tr);
-    
+    var tbody = $("#list").find('tbody');
+    var thead = $("#list").find('thead');
+
     $.ajax({
         type: "GET",
         dataType: "json",
         processData: false,
-        url: "/hyperstudy/api/studies" + study + "/post",
+        url: "/hyperstudy/api/studies/" + study + "/post",
         cache: false,
         success: function (data) {
-            data.forEach(function (element) {
-                addRow(element);
+            var items = Object.keys(data);
+            
+            var headTr = $('<tr>');
+            thead.append(headTr);
+            
+            items.forEach(function (key) {
+                headTr.append($('<td>').text(key));
+            });
+
+            var rows = [];
+            var i = 0;
+            for (var key in items) {
+                var item = items[key];
+                var column = data[item];
+
+                for (var j = 0; j < column.length; j++) {
+                    var element = column[j];
+
+                    if (i) {
+                        rows[j].push(element);
+                    } else {
+                        rows.push([element]);
+                    }
+                }
+                i++;
+            }
+
+            rows.forEach(function (row) {
+                var bodyTr = $('<tr>');
+                tbody.append(bodyTr);
+                row.forEach(function (element) {
+                    bodyTr.append($('<td>').text(element));
+                });
             });
         }
     });
