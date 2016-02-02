@@ -11,6 +11,7 @@ function loadTable() {
             var table = $("#list").find('tbody');
             table.append($('<tr>')
                 .append($('<td>').attr('data-attr', 'Label').text(data.Label).dblclick(editCell))
+                .append($('<td>').attr('data-attr', 'Varname').text(data.Varname))
                 .append($('<td>').attr('data-attr', 'Comment').text(data.Comment).dblclick(editCell)));
         }
     });
