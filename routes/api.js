@@ -34,6 +34,22 @@ router.delete('/studies/:study', function (req, res, next) {
 });
 
 
+router.post('/studies/:study/specification', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--perturb', 'set', req.param('label')]);
+});
+
+router.put('/studies/:study/specification', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--perturb', 'change', req.param('prop'), req.param('value')]);
+});
+
+router.get('/studies/:study/specification', function (req, res, next) {
+    var cmd = exec(res);
+    cmd.eval(req.params.study, ['--perturb', 'get']);
+});
+
+
 router.put('/studies/:study/evaluate', function (req, res, next) {
     var cmd = exec(res);
     cmd.eval(req.params.study, ['--evaluate']);
