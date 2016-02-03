@@ -14,11 +14,11 @@ body {
     padding: 15px;
 }
 
-#list {
+.tbl {
     padding: 25px;
 }
 
-#list {
+.tbl {
 	border: 1px solid #DFDFDF;
 	background-color: #F9F9F9;
 	width: 100%;
@@ -28,12 +28,12 @@ body {
 	font-family: Arial,"Bitstream Vera Sans",Helvetica,Verdana,sans-serif;
 	color: #333;
 }
-#list td, #list th {
+.tbl td, .tbl th {
 	border-top-color: white;
 	border-bottom: 1px solid #DFDFDF;
 	color: #555;
 }
-#list th {
+.tbl th {
 	text-shadow: rgba(255, 255, 255, 0.796875) 0px 1px 0px;
 	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
 	font-weight: normal;
@@ -42,7 +42,7 @@ body {
 	line-height: 1.3em;
 	font-size: 14px;
 }
-#list td {
+.tbl td {
 	font-size: 12px;
 	padding: 4px 7px 2px;
 	vertical-align: top;

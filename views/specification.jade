@@ -1,0 +1,41 @@
+extends layout
+
+append head
+  script.
+    var study = !{JSON.stringify(study)};
+  script(src="/javascripts/specification.js")
+ 
+append backward
+  p
+    a(href="/studies/" + study + "/responses") Back to Responses
+
+append content
+  table
+    thead
+      tr
+        td Engine
+        td Settings
+    tbody
+      tr
+        td
+          table#perturb.tbl
+            thead
+              tr
+                td Active
+                td Label
+                td Varname
+                td State
+                td Comment
+            tbody
+        td
+          table#props.tbl
+            thead
+              tr
+                td Label
+                td Value
+            tbody
+
+append forward
+  p
+    a(href="/studies/" + study + "/evaluate") Next to Evaluate
+
