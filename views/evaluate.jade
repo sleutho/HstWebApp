@@ -10,8 +10,10 @@ append backward
     a(href="/studies/" + study + "/responses") Back to Responses
 
 append content
-  input(id="work" type="button", size="30", value="Evaluate")
-  p#status
+  #msg Status
+  ul
+    li#status
+  input(id="eval" type="button", size="30", value="Evaluate")
 
 append forward
   p

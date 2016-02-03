@@ -16,7 +16,7 @@ function evaluateStudy() {
 
 $(document).ready(function () {
     $(document).ready(function () {
-        $('#work').bind('click', function () {
+        $('#eval').bind('click', function () {
             evaluateStudy();
         });
     });
