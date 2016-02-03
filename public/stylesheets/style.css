@@ -8,10 +8,28 @@ body {
     padding: 0;
 }
 
-#back, #next {
-    background-color: blue;
+#tool {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+#nav {
+    background-color: black;
     color: white;
     padding: 15px;
+    width: 100%;
+}
+
+.navlink {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navtable {
+    width: 100%;
+    text-align: center;
 }
 
 .tbl {

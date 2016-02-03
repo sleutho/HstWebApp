@@ -5,12 +5,22 @@ html
     block head
       link(rel='stylesheet', href='/stylesheets/style.css')
       script(src='https://code.jquery.com/jquery-1.12.0.js')
+    block customhead
   body
     #main
-      #back
-        block backward
+      #tool 
+        h2 HyperStudy WebApp v0.1
       #work
+        block contentarea
+          h3 #{title}
         block content
-          h1 #{title}
-      #next
-        block forward
+      #nav
+        table.navtable
+          tbody
+            tr
+              td.navlink
+                block backward
+              td.navlink
+                block index
+              td.navlink
+                block forward

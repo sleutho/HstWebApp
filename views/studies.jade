@@ -1,9 +1,9 @@
 extends layout
 
-append head
+block customhead
   script(src="/javascripts/studies.js")
 
-append content
+block content
   input(id="new" type="button", size="30", value="New Study")
   table#list.tbl
     thead
@@ -12,3 +12,5 @@ append content
         td Server Directory
         td
     tbody
+
+  

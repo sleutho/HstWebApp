@@ -1,21 +1,18 @@
-extends layout
+extends studylayout
 
-append head
+block customhead
   script.
     var study = !{JSON.stringify(study)};
   script(src="/javascripts/evaluate.js")
  
-append backward
-  p
-    a(href="/studies/" + study + "/specification") Back to Specification
-
-append content
+block content
   #msg Status
   ul
     li#status
   input(id="eval" type="button", size="30", value="Evaluate")
 
-append forward
-  p
-    a(href="/studies/" + study + "/summary") Next to Summary
+block backward
+  a(href="/studies/" + study + "/specification") Back to Specification
+block forward
+  a(href="/studies/" + study + "/summary") Next to Summary
 

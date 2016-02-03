@@ -1,15 +1,11 @@
-extends layout
+extends studylayout
 
-append head
+block customhead
   script.
     var study = !{JSON.stringify(study)};
   script(src="/javascripts/responses.js")
- 
-append backward
-  p
-    a(href="/studies/" + study + "/variables") Back to Variables
 
-append content
+block content
   input(id="new" type="button", size="30", value="New Response")
   table#list.tbl
     thead
@@ -26,8 +22,10 @@ append content
         td Comment
         td
     tbody
+ 
+block backward
+  a(href="/studies/" + study + "/variables") Back to Variables
 
-append forward
-  p
-    a(href="/studies/" + study + "/specification") Next to Specification
+block forward
+  a(href="/studies/" + study + "/specification") Next to Specification
 

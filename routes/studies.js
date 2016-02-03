@@ -7,6 +7,13 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/:study/studyindex', function (req, res, next) {
+    res.render('studyindex', {
+        title: 'Study ( ' + req.params.study + ' )',
+        study: req.params.study
+    });
+});
+
 router.get('/:study', function (req, res, next) {
     res.render('study', {
         title: 'Study ( ' + req.params.study + ' )',

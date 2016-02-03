@@ -1,0 +1,22 @@
+extends studylayout
+
+block customhead
+  script.
+    var study = !{JSON.stringify(study)};
+ 
+block content
+  p
+    a(href="/studies/" + study) All Studies
+  p
+    a(href="/studies/" + study) This Study
+  ul
+    li
+      a(href="/studies/" + study + "/variables") Variables
+    li
+      a(href="/studies/" + study + "/responses") Responses
+    li
+      a(href="/studies/" + study + "/specification") Specification
+    li
+      a(href="/studies/" + study + "/evaluate") Evaluation
+    li
+      a(href="/studies/" + study + "/summary") Summary
