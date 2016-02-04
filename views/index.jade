@@ -1,13 +1,6 @@
 extends layout
-
-block customhead
-  script(src="/javascripts/index.js")
   
 block content
-  table#login
-    tbody
-      tr
-        td
-          input(id="username" type="input", size="30", placeholder="username")
-        td
-          input(id="login" type="button", size="30", value="Login")
+  form(method="post", action="/login")
+    input(id="username" type="input", size="30", placeholder="username", name="username")
+    input(id="login" type="submit", size="30", value="Login")
