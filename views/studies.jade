@@ -3,6 +3,9 @@ extends layout
 block customhead
   script(src="/javascripts/studies.js")
 
+block logout
+  a(href="/logout") Logout
+  
 block content
   input(id="new" type="button", size="30", value="New Study")
   table#list.tbl

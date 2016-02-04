@@ -1,5 +1,13 @@
 extends layout
 
+block customhead
+  script(src="/javascripts/index.js")
+  
 block content
-  h1= title
-  p Welcome to #{title}
+  table#login
+    tbody
+      tr
+        td
+          input(id="username" type="input", size="30", placeholder="username")
+        td
+          input(id="login" type="button", size="30", value="Login")
