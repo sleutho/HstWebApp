@@ -5,7 +5,8 @@ var exec = require('../study/exec');
 var router = express.Router();
 
 router.get('/studies', function (req, res, next) {
-    studylist.getStudyList(function (err, data) {
+    console.log("Cookies: ", req.cookies);
+    studylist.getStudyList(req.cookies.username, function (err, data) {
         res.status(err ? 400 : 200).json(err ? err : data);
     });
 });
@@ -16,7 +17,8 @@ router.get('/studies/:study', function (req, res, next) {
 });
 
 router.post('/studies', function (req, res, next) {
-    studylist.createStudy(function (err, data) {
+    console.log("Cookies: ", req.cookies);
+    studylist.createStudy(req.cookies.username, function (err, data) {
         res.status(err ? 400 : 200).json(err ? err : data);
     });
 });

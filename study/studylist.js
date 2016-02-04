@@ -23,19 +23,20 @@ var db = new Datastore({
         autoload: true,
         timestampData: true});
 
-exports.getStudyList = function (onList) {
-    db.find({}, function (err, docs) {
+exports.getStudyList = function (username, onList) {
+    db.find({ username: username }, function (err, docs) {
         onList(err, docs);
     });
 };
 
-exports.createStudy = function (onCreate) {
+exports.createStudy = function (username, onCreate) {
     var id = uuid.v4();
     var studyDir = path.join(getDataHome(), id);
     fs.mkdirSync(studyDir)
     
     var doc = {
         study: id,
+        username: username,
         directory: studyDir};
 
     db.insert(doc, function (err, newDoc) {

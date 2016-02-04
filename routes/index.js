@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
     if (req.param('username').length) {
-        res.cookie('username', req.param('username'));
+        res.cookie('username', req.param('username'), { httpOnly: false, secure: false});
         res.redirect('/studies');
     } else {
         res.redirect('/');
