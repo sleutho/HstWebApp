@@ -1,6 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
+
+var cookieTest = function (req, res, next) {
+    console.log("Cookies: ", req.cookies);
+    if (Object.keys(req.cookies).indexOf('username') == -1) {
+        res.redirect('/');
+    } else if (req.cookies.username.length == 0) {
+        res.clearCookie('username');
+        res.redirect('/');
+    } else {
+        next();
+    }
+}
+
+router.get('/*', cookieTest);
+
 router.get('/', function (req, res, next) {
     res.render('studies', {
         title: 'Studies'
