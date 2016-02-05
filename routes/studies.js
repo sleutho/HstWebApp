@@ -71,4 +71,11 @@ router.get('/:study/summary', function (req, res, next) {
     });
 });
 
+router.get('/:study/plot', function (req, res, next) {
+    res.render('plot', {
+        title: 'Plot',
+        study: req.params.study
+    });
+});
+
 module.exports = router;

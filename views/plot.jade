@@ -1,0 +1,13 @@
+extends studylayout
+
+block customhead
+  script.
+    var study = !{JSON.stringify(study)};
+  script(src="/javascripts/plot.js")
+  script(src='/javascripts/jquery.flot.js')
+
+block content
+  #graph(style="width:600px;height:400px")
+ 
+block backward
+  a(href="/studies/" + study + "/summary" class="navbutton") Back to Summary
