@@ -21,7 +21,7 @@ function addRow(obj) {
     var tr = $('<tr>').attr('data-id', obj.study);
     tr.append($('<td>').append($('<a>', { text: obj.study, title: 'Open Study', href: "/studies/" + obj.study })));
     tr.append($('<td>').text(obj.directory));
-    tr.append($('<input id="remove" type="button" size="20" value="Remove">').on('click', function () {
+    tr.append($('<input id="remove" type="button" size="20" value="Remove" class="remove">').on('click', function () {
         removeStudy(obj.study, function () {
             $('*[data-id="' + obj.study + '"]').remove();
         });
