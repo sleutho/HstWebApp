@@ -29,7 +29,7 @@ function addRow(obj) {
     tr.append($('<td>').attr('data-attr', 'MaxValueAttr').dblclick(editCell).text(obj.MaxValueAttr));
     tr.append($('<td>').attr('data-attr', 'MasterEvaluator').dblclick(editCell).text(obj.MasterEvaluator));
     tr.append($('<td>').attr('data-attr', 'Comment').dblclick(editCell).text(obj.Comment));
-    tr.append($('<input id="remove" type="button" size="20" value="Remove" class="remove">').on('click', function () {
+    tr.append($('<td>').append('<input id="remove" type="button" size="20" value="Remove" class="remove">').on('click', function () {
         removeResponse(obj.Varname, function () {
             $('*[data-id="' + obj.Varname + '"]').remove();
         });

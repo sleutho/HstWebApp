@@ -39,7 +39,7 @@ function addRow(obj) {
     tr.append($('<td>').attr('data-attr', 'Beta').dblclick(editCell).text(obj.Beta));
     tr.append($('<td>').attr('data-attr', 'DataMode').dblclick(editCell).text(obj.Gamma));
     tr.append($('<td>').attr('data-attr', 'Comment').dblclick(editCell).text(obj.Comment));
-    tr.append($('<input id="remove" type="button" size="20" value="Remove" class="remove">').on('click', function () {
+    tr.append($('<td>').append('<input id="remove" type="button" size="20" value="Remove" class="remove">').on('click', function () {
         removeVariable(obj.Varname, function () {
             $('*[data-id="' + obj.Varname + '"]').remove();
         });
