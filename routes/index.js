@@ -2,9 +2,11 @@ var express = require('express')
 var router = express.Router()
 
 router.get('/', function (req, res, next) {
-  console.log('Cookies: ', req.cookies)
+  console.log(' Cookies: ', req.cookies)
+  console.log(' Body   : ', req.param.body)
+  console.log(' Query  : ', req.param.query)
   if (Object.keys(req.cookies).indexOf('username') !== -1) {
-    return res.redirect('/studies')
+    res.redirect('/studies')
   } else {
     res.render('index', { title: 'Choose a new username / Enter your username' })
   }
