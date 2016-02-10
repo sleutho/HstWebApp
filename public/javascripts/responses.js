@@ -88,7 +88,6 @@ function editCell () {
       $.ajax({
         type: 'PUT',
         url: '/hyperstudy/api/studies/' + study + '/responses/' + varname,
-        // data: 'attr=' + attr + '&value=' + newContent,
         data: { attr: attr, value: newContent },
         cache: false,
         success: function (data) {
