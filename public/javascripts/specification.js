@@ -57,7 +57,7 @@ function editActivePerturb () {
       var newContent = $(this).val()
       var parent = $(this).parent()
 
-      if (newContent === 1) {
+      if (newContent === '1') {
         $.ajax({
           type: 'POST',
           url: '/hyperstudy/api/studies/' + study + '/specification',
