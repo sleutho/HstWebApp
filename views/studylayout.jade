@@ -1,5 +1,9 @@
 extends layout
 
+append head
+  script.
+    var study = !{JSON.stringify(study)};
+    
 block logout
   a(href="/logout" class="logoutbutton") Logout
   

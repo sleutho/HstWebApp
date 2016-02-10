@@ -1,8 +1,6 @@
 extends studylayout
 
 block customhead
-  script.
-    var study = !{JSON.stringify(study)};
   script(src="/javascripts/evaluate.js")
  
 block content
@@ -15,4 +13,3 @@ block backward
   a(href="/studies/" + study + "/specification" class="navbutton") Back to Specification
 block forward
   a(href="/studies/" + study + "/summary" class="navbutton") Next to Summary
-
