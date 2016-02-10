@@ -3,8 +3,9 @@ var router = express.Router()
 
 router.get('/', function (req, res, next) {
   console.log(' Cookies: ', req.cookies)
-  console.log(' Body   : ', req.param.body)
-  console.log(' Query  : ', req.param.query)
+  console.log(' Params : ', req.params)
+  console.log(' Body   : ', req.body)
+  console.log(' Query  : ', req.query)
   if (Object.keys(req.cookies).indexOf('username') !== -1) {
     res.redirect('/studies')
   } else {

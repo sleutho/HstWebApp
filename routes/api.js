@@ -6,8 +6,9 @@ var router = express.Router()
 
 var cookieTest = function (req, res, next) {
   console.log(' Cookies: ', req.cookies)
-  console.log(' Body   : ', req.param.body)
-  console.log(' Query  : ', req.param.query)
+  console.log(' Params : ', req.params)
+  console.log(' Body   : ', req.body)
+  console.log(' Query  : ', req.query)
   if (Object.keys(req.cookies).indexOf('username') === -1) {
     res.status(401)
     return
@@ -40,7 +41,7 @@ router.post('/', function (req, res, next) {
 
 router.put('/:study', function (req, res, next) {
   var cmd = exec(res)
-  cmd.eval(req.params.study, ['--change', 'study', req.param('attr'), req.param('value')])
+  cmd.eval(req.params.study, ['--change', 'study', req.body.attr, req.body.value])
 })
 
 router.delete('/:study', function (req, res, next) {
@@ -52,12 +53,12 @@ router.delete('/:study', function (req, res, next) {
 
 router.post('/:study/specification', function (req, res, next) {
   var cmd = exec(res)
-  cmd.eval(req.params.study, ['--perturb', 'set', req.param('label')])
+  cmd.eval(req.params.study, ['--perturb', 'set', req.body.label])
 })
 
 router.put('/:study/specification', function (req, res, next) {
   var cmd = exec(res)
-  cmd.eval(req.params.study, ['--perturb', 'change', req.param('prop'), req.param('value')])
+  cmd.eval(req.params.study, ['--perturb', 'change', req.body.prop, req.body.value])
 })
 
 router.get('/:study/specification', function (req, res, next) {
@@ -101,7 +102,7 @@ router.post('/:study/variables', function (req, res, next) {
 
 router.put('/:study/variables/:item', function (req, res, next) {
   var cmd = exec(res)
-  cmd.eval(req.params.study, ['--change', req.params.item, req.param('attr'), req.param('value')])
+  cmd.eval(req.params.study, ['--change', req.params.item, req.body.attr, req.body.value])
 })
 
 router.delete('/:study/variables/:item', function (req, res, next) {
@@ -127,7 +128,7 @@ router.post('/:study/responses', function (req, res, next) {
 
 router.put('/:study/responses/:item', function (req, res, next) {
   var cmd = exec(res)
-  cmd.eval(req.params.study, ['--change', req.params.item, req.param('attr'), req.param('value')])
+  cmd.eval(req.params.study, ['--change', req.params.item, req.body.attr, req.body.value])
 })
 
 router.delete('/:study/responses/:item', function (req, res, next) {
