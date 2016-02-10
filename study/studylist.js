@@ -3,6 +3,7 @@ var uuid = require('uuid')
 var fs = require('fs')
 var cmd = require('./cmd')
 var path = require('path')
+var config = require('config')
 
 function getUserHome () {
   return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME']
@@ -10,6 +11,14 @@ function getUserHome () {
 
 var getDataHome = exports.getDataHome = function () {
   var dataHome = path.join(getUserHome(), 'HstWebApp')
+  
+  if (config.has('dataroot.path')) {
+    var datapath = config.get('dataroot.path')
+    if (path.length) {
+      dataHome = datapath
+    }
+  }
+  
   try {
     fs.mkdirSync(dataHome)
   } finally {
